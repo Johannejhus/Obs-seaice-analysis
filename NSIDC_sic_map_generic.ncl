@@ -10,8 +10,8 @@ begin
   isAnom = True   ;plot SIC as anom or abs value
   latmax = -54.
 
-  stdat  = 202502   ;start date (YYYYMM)  
-  endat  = 202502;;  ;end date (YYYYMM) 
+  stdat  = 202209   ;start date (YYYYMM)  
+  endat  = 202209;;  ;end date (YYYYMM) 
   
   ;climatology start and end dates [2004-2018 is the ARGO climatology)
   clst   = 1979
