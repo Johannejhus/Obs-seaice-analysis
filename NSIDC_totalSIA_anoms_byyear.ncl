@@ -12,7 +12,7 @@ begin
 
 ;refyear = yren
 
-  refyear = (/2023,2024, 2025/)  ;years to highlight
+  refyear = (/2022,2023,2024, 2025/)  ;years to highlight
 
   diri = "/g/data/gv90/wrh581/NSIDC/"
   fili = "NSIDC_SH_totalSIA_monthly_"+(/"v05r00.nc","v03r00.nc"/)
