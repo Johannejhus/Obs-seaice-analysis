@@ -6,10 +6,10 @@ load "ncl_funcs.ncl"
 begin
 
 ;spatial domain
-  latmin = -65.
-  latmax = -45.
-  lonmin = 0.
-  lonmax = 360.
+  latmin = -70.
+  latmax = -55.
+  lonmin = -10.
+  lonmax = 70.
 
 ;climatology
   clst = 1982
