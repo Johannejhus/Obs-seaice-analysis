@@ -37,7 +37,7 @@ begin
 ;dlon = 1.
 
 src = "ORAS5"
-;  var    = "vosaline";"votemper";
+  var    = "vosaline";"votemper";
   diri   = "/g/data/gv90/wrh581/"+src+"/"+var+"/"   
   vNam    = var
   fili = systemfunc("ls "+diri+"ORAS5_"+var+"_monthly_SOcean_{"+str_join(ispan(stdat/100,endat/100,1),",")+"}.nc 2>/dev/null")
