@@ -27,7 +27,7 @@ begin
 
 
 ;plot file
-  dirp  = "/g/data/jk72/wrh581/Obs-seaice-analysis/plots/"
+  dirp  = "plots/"
   filp  = "NSIDC_cdr_map_"+stdat+"-"+endat
   pType = "png"
   if (isAni) then
