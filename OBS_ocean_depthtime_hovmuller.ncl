@@ -9,11 +9,11 @@ load "plot_funcs.ncl"
 begin
 
   ;spatial domain
-  sNam   = "Weddell" ; "SOcean" 
-  latmax = -55.
-  latmin = -65.
-  lonmin = 330.; 0.
-  lonmax = 20. ;360.
+  sNam   = "Study Area" ; "SOcean" 
+  latmax = -70.
+  latmin = -55.
+  lonmin = -10.; 0.
+  lonmax = 30. ;360.
   zmin   = 0.
   zmax   = 1000.
 
