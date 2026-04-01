@@ -21,7 +21,7 @@ begin
 ;Obs data
   diroi = "/g/data/gv90/wrh581/NSIDC/monthly_sic/"
   filoi = diroi+"sic_pss25_"+array_append_record("197811-202412_v05r00.nc",\
- "2025"+sprinti("%0.2i",ispan(1,endat%100,1))+"_F17_icdr_v03r00.nc" ,0)
+ "2022"+sprinti("%0.2i",ispan(1,endat%100,1))+"_F17_icdr_v03r00.nc" ,0)
   oiNam = "cdr_seaice_conc_monthly"
 
 
