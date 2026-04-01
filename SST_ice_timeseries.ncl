@@ -9,7 +9,7 @@ begin
   latmin = -70.
   latmax = -55.
   lonmin = -10.
-  lonmax = 70.
+  lonmax = 30.
 
 ;climatology
   clst = 1982
