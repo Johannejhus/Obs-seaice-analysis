@@ -6,7 +6,7 @@ begin
 ; Spatial domain
 ;===============================
 latmin = -70.
-latmax = -55.
+latmax = -65.
 lonmin = -10.
 lonmax = 30.
 
@@ -79,36 +79,35 @@ end do
 ; READ REGIONAL ICE
 ;===============================
 
-fi = addfiles(diri_ice+fili_ice,"r")
+;===============================
+; READ REGIONAL ICE (monthly)
+;===============================
+diri_ice = "/g/data/gv90/wrh581/NSIDC/"
+fili_ice = "NSIDC_SH_icearea_"+(/ \
+             "v05r00_197811-202412.nc", \
+             "v03r00_202501-202505.nc"/)
 
-tice = fi[:]->time
-if (typeof(tice).eq."int64") then
-  ttmp = tice
-  tice := toint(ttmp)
-  copy_VarAtts(ttmp,tice)
-  delete(ttmp)
-end if
+iNam = "SIA"     ; use SIA from this file
 
-YYYYMM = cd_calendar(tice,-1)
+fi = addfiles(diri_ice+fili_ice, "r")
 
-ICE = fi[:]->$iNam$
-ICE&time := YYYYMM
-
-ICE = ICE({yrst*100+1:yren*100+12},:)
+ICE = fi[:]->$iNam$({yrst*100+1:yren*100+12},:)
 ICE = ICE * 1.e-6
 
+; correct missing values
+if (yrst.lt.1987 .and. yren.ge.1988) then
+  ICE({198712:198801},:) = ICE@_FillValue
+end if
 
-
+; regional integral
 if (xmin.lt.xmax) then
   ice_reg = dim_sum_Wrap(ICE(:,{xmin:xmax}))
 else
   ice_reg = dim_sum_Wrap(ICE(:,{xmin:}))
-  ice_reg = ice_reg + (/dim_sum(ICE(:,{:xmax}))/)
+  ice_reg = ice_reg + (/ dim_sum(ICE(:,{:xmax})) /)
 end if
 
-ice_reg!0    = "time"
-ice_reg&time = ICE&time
-
+; monthly anomalies
 do m = 1, 12
   clim = avg(ice_reg({clst*100+m:clen*100+m:12}))
   ice_reg({yrst*100+m::12}) = ice_reg({yrst*100+m::12}) - clim
