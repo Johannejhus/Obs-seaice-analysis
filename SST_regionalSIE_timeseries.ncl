@@ -21,7 +21,7 @@ clst = 1982
 clen = 2008
 
 yrst = 1982
-yren = 2026
+yren = 2024
 
 ;===============================
 ; SST data
@@ -198,5 +198,12 @@ xbox = (/xJan25-0.5, xJan25+0.5, xJan25+0.5, xJan25-0.5/)
 polys(5) = gsn_add_polygon(wks, plot, xbox, ybox, pres)
 draw(plot)
 frame(wks)
+
+do yr = 2023, 2025
+  sst_jan = sst({yr*100+1})
+  print("Mean SST, January "+yr+":")
+  print(sst_jan)
+end do
+
 
 end
