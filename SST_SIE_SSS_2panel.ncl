@@ -78,12 +78,26 @@ end do
 ;===============================
 ; READ REGIONAL ICE
 ;===============================
-fi = addfiles(diri_ice+fili_ice,"r")
-YYYYMM = fi[:]->YYYYMM
-ICE = fi[:]->$iNam$({yrst*100+1:yren*100+12},:)
-ICE&time := YYYYMM({yrst*100+1:yren*100+12})
 
+fi = addfiles(diri_ice+fili_ice,"r")
+
+tice = fi[:]->time
+if (typeof(tice).eq."int64") then
+  ttmp = tice
+  tice := toint(ttmp)
+  copy_VarAtts(ttmp,tice)
+  delete(ttmp)
+end if
+
+YYYYMM = cd_calendar(tice,-1)
+
+ICE = fi[:]->$iNam$
+ICE&time := YYYYMM
+
+ICE = ICE({yrst*100+1:yren*100+12},:)
 ICE = ICE * 1.e-6
+
+
 
 if (xmin.lt.xmax) then
   ice_reg = dim_sum_Wrap(ICE(:,{xmin:xmax}))
