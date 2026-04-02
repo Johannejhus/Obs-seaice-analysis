@@ -6,7 +6,7 @@ begin
 ; Spatial domain
 ;===============================
 latmin = -70.
-latmax = -55.
+latmax = -60.
 lonmin = -10.
 lonmax = 30.
 
@@ -147,7 +147,55 @@ resSIE@trYMinF          = -3.
 resSIE@trYReverse       = True
 
 plot = gsn_csm_xy2(wks, tdum, sst_anoms, sie, resSST, resSIE)
+;========================================
+; Add shaded months
+;========================================
+pres = True
+pres@gsFillColor = "gray85"
+pres@gsEdgesOn   = False
 
+nsh = 6
+polys = new(nsh,graphic)
+
+; x index helper:
+; x = (year-yrst)*12 + month
+; since tdum starts at 1
+
+xJan23 = (2023-yrst)*12 + 1
+xSep22 = (2022-yrst)*12 + 9
+
+xJan24 = (2024-yrst)*12 + 1
+xSep23 = (2023-yrst)*12 + 9
+
+xJan25 = (2025-yrst)*12 + 1
+xSep24 = (2024-yrst)*12 + 9
+
+; use SST axis range for shading polygons
+y0 = resSST@trYMinF
+y1 = resSST@trYMaxF
+
+; September before measurements
+xbox = (/xSep22-0.5, xSep22+0.5, xSep22+0.5, xSep22-0.5/)
+ybox = (/y0, y0, y1, y1/)
+polys(0) = gsn_add_polygon(wks, plot, xbox, ybox, pres)
+
+xbox = (/xSep23-0.5, xSep23+0.5, xSep23+0.5, xSep23-0.5/)
+polys(1) = gsn_add_polygon(wks, plot, xbox, ybox, pres)
+
+xbox = (/xSep24-0.5, xSep24+0.5, xSep24+0.5, xSep24-0.5/)
+polys(2) = gsn_add_polygon(wks, plot, xbox, ybox, pres)
+
+; January measurements
+pres@gsFillColor = "khaki1"
+
+xbox = (/xJan23-0.5, xJan23+0.5, xJan23+0.5, xJan23-0.5/)
+polys(3) = gsn_add_polygon(wks, plot, xbox, ybox, pres)
+
+xbox = (/xJan24-0.5, xJan24+0.5, xJan24+0.5, xJan24-0.5/)
+polys(4) = gsn_add_polygon(wks, plot, xbox, ybox, pres)
+
+xbox = (/xJan25-0.5, xJan25+0.5, xJan25+0.5, xJan25-0.5/)
+polys(5) = gsn_add_polygon(wks, plot, xbox, ybox, pres)
 draw(plot)
 frame(wks)
 
