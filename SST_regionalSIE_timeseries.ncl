@@ -34,10 +34,15 @@ fili_sst = "OIv2_SST_1982-2026.nc"
 ;===============================
 ; Ice data
 ;===============================
+;diri_ice = "/g/data/gv90/wrh581/NSIDC/"
+;fili_ice = "NSIDC_SH_icearea_"+(/ \
+;             "v05r00_197811-202412.nc", \
+;             "v03r00_202501-202505.nc"/)
+
 diri_ice = "/g/data/gv90/wrh581/NSIDC/"
-fili_ice = "NSIDC_SH_icearea_"+(/ \
-             "v05r00_197811-202412.nc", \
-             "v03r00_202501-202505.nc"/)
+fili_ice = "NSIDC_SH_icearea_v06r00_197811-202512.nc"
+
+
 
 iNam = "SIA"
 
@@ -79,9 +84,13 @@ end do
 ;===============================
 ; READ REGIONAL ICE
 ;===============================
-fi = addfiles(diri_ice+fili_ice,"r")
+;fi = addfiles(diri_ice+fili_ice,"r")
 
-ICE = fi[:]->$iNam$({yrst*100+1:yren*100+12},:)
+;ICE = fi[:]->$iNam$({yrst*100+1:yren*100+12},:)
+;ICE = ICE * 1.e-6
+
+fi  = addfile(diri_ice+fili_ice, "r")
+ICE = fi->$iNam$({yrst*100+1:yren*100+12},:)
 ICE = ICE * 1.e-6
 
 ; correct missing values
