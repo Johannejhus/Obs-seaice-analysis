@@ -22,7 +22,7 @@ begin
   ;---------------------------------
   ; Choose map type
   ;---------------------------------
-  map_type = "january"     ; options: "january" or "winter"
+  map_type = "winter"     ; options: "january" or "winter"
 
   ;---------------------------------
   ; Target year
