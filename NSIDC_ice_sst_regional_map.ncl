@@ -29,7 +29,7 @@ begin
   ; january: plots Jan of this year
   ; winter : plots Jul-Aug of previous year
   ;---------------------------------
-  targyr = 2021
+  targyr = 2022
 
   ;---------------------------------
   ; Plot SST as anomaly or absolute
