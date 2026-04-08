@@ -166,63 +166,57 @@ plot = gsn_csm_xy2(wks, tdum, sst_anoms, sie, resSST, resSIE)
 ;========================================
 ; Add shaded months
 ;========================================
+
+;========================================
+; Add shaded periods
+;   grey  = Jul-Aug before measurement year
+;   khaki = Dec-Jan measurement season
+;========================================
 pres = True
-pres@gsFillColor = "gray85"
 pres@gsEdgesOn   = False
 
-nsh = 8
+nsh = 10
 polys = new(nsh,graphic)
 
 ; x = (year-yrst)*12 + month
+; month: Jan=1, ..., Dec=12
 
-xJan21 = (2021-yrst)*12 + 1
-xJan22 = (2022-yrst)*12 + 1
-xJan23 = (2023-yrst)*12 + 1
-xJan24 = (2024-yrst)*12 + 1
-xJan25 = (2025-yrst)*12 + 1
-
-xJul20 = (2020-yrst)*12 + 7
-xAug20 = (2020-yrst)*12 + 8
-
-xJul21 = (2021-yrst)*12 + 7
-xAug21 = (2021-yrst)*12 + 8
-
-xJul22 = (2022-yrst)*12 + 7
-xAug22 = (2022-yrst)*12 + 8
+; measurement years
+meas_years = (/2021, 2022, 2023, 2024, 2025/)
 
 y0 = resSST@trYMinF
 y1 = resSST@trYMaxF
-
-; winter before Jan 2021
-xbox = (/xJul20-0.5, xAug20+0.5, xAug20+0.5, xJul20-0.5/)
 ybox = (/y0, y0, y1, y1/)
-polys(0) = gsn_add_polygon(wks, plot, xbox, ybox, pres)
 
-; winter before Jan 2022
-xbox = (/xJul21-0.5, xAug21+0.5, xAug21+0.5, xJul21-0.5/)
-polys(1) = gsn_add_polygon(wks, plot, xbox, ybox, pres)
+k = 0
+do i = 0, dimsizes(meas_years)-1
+  yr = meas_years(i)
+  prevyr = yr - 1
 
-; winter before Jan 2023
-xbox = (/xJul22-0.5, xAug22+0.5, xAug22+0.5, xJul22-0.5/)
-polys(2) = gsn_add_polygon(wks, plot, xbox, ybox, pres)
+  ;----------------------------------------
+  ; Grey box: Jul-Aug in year before
+  ;----------------------------------------
+  pres@gsFillColor = "gray85"
 
-; January measurement periods
-pres@gsFillColor = "khaki1"
+  xJul = (prevyr-yrst)*12 + 7
+  xAug = (prevyr-yrst)*12 + 8
 
-xbox = (/xJan21-0.5, xJan21+0.5, xJan21+0.5, xJan21-0.5/)
-polys(3) = gsn_add_polygon(wks, plot, xbox, ybox, pres)
+  xbox = (/xJul-0.5, xAug+0.5, xAug+0.5, xJul-0.5/)
+  polys(k) = gsn_add_polygon(wks, plot, xbox, ybox, pres)
+  k = k + 1
 
-xbox = (/xJan22-0.5, xJan22+0.5, xJan22+0.5, xJan22-0.5/)
-polys(4) = gsn_add_polygon(wks, plot, xbox, ybox, pres)
+  ;----------------------------------------
+  ; Yellow box: Dec-Jan measurement season
+  ;----------------------------------------
+  pres@gsFillColor = "khaki1"
 
-xbox = (/xJan23-0.5, xJan23+0.5, xJan23+0.5, xJan23-0.5/)
-polys(5) = gsn_add_polygon(wks, plot, xbox, ybox, pres)
+  xDec = (prevyr-yrst)*12 + 12
+  xJan = (yr-yrst)*12 + 1
 
-xbox = (/xJan24-0.5, xJan24+0.5, xJan24+0.5, xJan24-0.5/)
-polys(6) = gsn_add_polygon(wks, plot, xbox, ybox, pres)
-
-xbox = (/xJan25-0.5, xJan25+0.5, xJan25+0.5, xJan25-0.5/)
-polys(7) = gsn_add_polygon(wks, plot, xbox, ybox, pres)
+  xbox = (/xDec-0.5, xJan+0.5, xJan+0.5, xDec-0.5/)
+  polys(k) = gsn_add_polygon(wks, plot, xbox, ybox, pres)
+  k = k + 1
+end do
 
 draw(plot)
 frame(wks)
