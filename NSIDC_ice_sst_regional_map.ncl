@@ -268,15 +268,31 @@ begin
 ; SIC SHADE RESOURCES
 ;=========================================================
 
-  cres                        = ires
+;=========================================================
+; SIC SHADE RESOURCES
+;=========================================================
+
+  cres                        = True
+  cres@gsnDraw                = False
+  cres@gsnFrame               = False
+  cres@trGridType             = "TriangularMesh"
+  cres@cnLineLabelsOn         = False
+  cres@cnInfoLabelOn          = False
+  cres@gsnLeftString          = ""
+  cres@gsnRightString         = ""
+
   cres@cnLinesOn              = False
   cres@cnFillOn               = True
+  cres@cnLevelSelectionMode   = "ExplicitLevels"
   cres@cnLevels               = (/0.15,0.3,0.4,0.5,0.6,0.7,0.8,0.9/)
-  nlev                        = dimsizes(cres@cnLevels)
 
+  nlev                        = dimsizes(cres@cnLevels)
   imap                        = new((/nlev,4/), float)
-  imap(:,:2)                  = 1.
+  imap(:,0)                   = 1.
+  imap(:,1)                   = 1.
+  imap(:,2)                   = 1.
   imap(:,3)                   = fspan(0.,1.,nlev)
+
   cres@cnFillPalette          = imap
 
 ;=========================================================
