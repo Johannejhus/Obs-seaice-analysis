@@ -37,7 +37,7 @@ fili_sst = "OIv2_SST_1982-2026.nc"
 diri_ice = "/g/data/gv90/wrh581/NSIDC/"
 fili_ice = "NSIDC_SH_icearea_"+(/ \
              "v05r00_197811-202412.nc", \
-             "v03r00_202501-202603.nc"/)
+             "v03r00_202501-202505.nc"/)
 
 iNam = "SIA"
 
