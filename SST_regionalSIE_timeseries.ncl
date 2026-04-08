@@ -5,7 +5,7 @@ begin
 ;===============================
 ; Spatial domain
 ;===============================
-latmin = -70.1.
+latmin = -70.
 latmax = -67.
 lonmin =0.;10
 lonmax = 30.
