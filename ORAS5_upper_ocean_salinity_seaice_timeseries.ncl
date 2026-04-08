@@ -30,7 +30,7 @@ sNam     = "vosaline"
 osrc     = "ORAS5"
 diri_sal = "/g/data/gv90/wrh581/ORAS5/"
 ; CHANGE THIS to the correct file once you confirm it
-fili_sal = "ORAS5_vosaline_monthly.nc"
+fili_sal = "vosaline.nc"
 
 ;===============================
 ; Ice data
