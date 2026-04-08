@@ -7,11 +7,11 @@ begin
 ;===============================
 latmin = -70.
 latmax = -65.
-lonmin =-10.
+lonmin =0.;10
 lonmax = 30.
 
 ; ice-sector longitude in 0–360
-xmin = 350.
+xmin = 0;350.
 xmax = 30.
 
 ;===============================
