@@ -288,4 +288,18 @@ print("Sea-ice file only extends to May 2025 in this script.")
 print("So January 2026 and winter 2025 sea-ice anomalies cannot be calculated")
 print("unless you add a newer NSIDC file.")
 
+print(" ")
+print("==============================================")
+print("CLIMATOLOGICAL SST (0 anomaly temperature)")
+print("==============================================")
+
+jan_clim = sst_clim(0)
+jul_clim = sst_clim(6)
+aug_clim = sst_clim(7)
+
+winter_clim = avg((/jul_clim, aug_clim/))
+
+print("January climatological SST (0 anomaly) = " + jan_clim)
+print("Winter climatological SST (0 anomaly)  = " + winter_clim)
+
 end
