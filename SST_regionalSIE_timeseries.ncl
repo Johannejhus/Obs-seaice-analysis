@@ -237,14 +237,25 @@ do i = 0, dimsizes(target_years_sst)-1
   prevyr = yr - 1
 
   sst_jan = sst_mon({yr*100+1})
-  sst_winter = avg( sst_mon({prevyr*100+7:prevyr*100+8}) )
-  sst_jan_anom = sst_anoms({yr*100+1})
-  sst_winter_anom = avg(sst_anoms({prevyr*100+7:prevyr*100+8}))
+  sst_winter = avg(sst_mon({prevyr*100+7:prevyr*100+8}))
+
   print("Year " + yr)
   print("  January SST            = " + sst_jan)
   print("  Previous winter SST    = " + sst_winter + "   (Jul-Aug " + prevyr + ")")
-  print("  January SST anomaly    = " + sst_jan_anom)
-  print("  Winter SST anomaly     = " + sst_winter_anom)
+
+  if (yr.le.yren) then
+    sst_jan_anom = sst_anoms({yr*100+1})
+    print("  January SST anomaly    = " + sst_jan_anom)
+  else
+    print("  January SST anomaly    = not available")
+  end if
+
+  if (prevyr.le.yren) then
+    sst_winter_anom = avg(sst_anoms({prevyr*100+7:prevyr*100+8}))
+    print("  Winter SST anomaly     = " + sst_winter_anom)
+  else
+    print("  Winter SST anomaly     = not available")
+  end if
 
 end do
 
