@@ -224,6 +224,7 @@ frame(wks)
 ;=========================================================
 ; PRINT MEAN SST FOR JANUARY AND PREVIOUS WINTER (JUL-AUG)
 ;=========================================================
+
 print(" ")
 print("==============================================")
 print("MEAN SST: JANUARY AND PREVIOUS WINTER (JUL-AUG)")
@@ -237,10 +238,14 @@ do i = 0, dimsizes(target_years_sst)-1
 
   sst_jan = sst_mon({yr*100+1})
   sst_winter = avg( sst_mon({prevyr*100+7:prevyr*100+8}) )
-
+  sst_jan_anom = sst_anoms({yr*100+1})
+  sst_winter_anom = avg(sst_anoms({prevyr*100+7:prevyr*100+8}))
   print("Year " + yr)
   print("  January SST            = " + sst_jan)
   print("  Previous winter SST    = " + sst_winter + "   (Jul-Aug " + prevyr + ")")
+  print("  January SST anomaly    = " + sst_jan_anom)
+  print("  Winter SST anomaly     = " + sst_winter_anom)
+
 end do
 
 ;=========================================================
